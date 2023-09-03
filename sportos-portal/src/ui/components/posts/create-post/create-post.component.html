@@ -1,0 +1,85 @@
+<div class="layout-main">
+  <div
+    style="
+      width: 80%;
+      margin: auto;
+      -webkit-border-radius: 10px;
+      -moz-border-radius: 10px;
+      padding: 25px;
+      filter: alpha(opacity=95);
+      opacity: 0.95;
+      border-radius: 10x;
+      border: 1px solid #ffffff;
+      text-align: center;
+    "
+  >
+    <h3 i18n>{{ "createPost.title" | translate }}</h3>
+
+    <form [formGroup]="form" (keydown.enter)="submitForm($event)">
+      <div class="formgroup-inline">
+        <!-- text -->
+        <div
+          class="p-field p-col"
+          style="width: 80%; padding-bottom: 20px; margin: 0 auto"
+        >
+          <span class="p-fluid">
+            <textarea
+              pInputTextarea
+              placeholder="Write something"
+              [formControl]="form.controls['text']"
+            ></textarea>
+          </span>
+        </div>
+
+        <div
+          class="p-field p-col"
+          style="
+            width: 80%;
+            margin: 0 auto;
+            margin-bottom: 10px;
+            text-align: left;
+          "
+        >
+          Add images to your post
+        </div>
+        <!-- images -->
+        <div
+          class="p-field p-col"
+          style="
+            width: 80%;
+            padding-bottom: 20px;
+            margin: 0 auto;
+            display: block;
+          "
+        >
+          <span class="p-fluid">
+            <p-fileUpload
+              [multiple]="true"
+              [auto]="true"
+              accept=".jpg,.png"
+              name="images"
+              title="Add images to post"
+              (onSelect)="onFileChanged($event)"
+            >
+            </p-fileUpload>
+          </span>
+        </div>
+
+        <!-- button -->
+        <div class="p-field p-col" style="width: 80%; margin: 0 auto">
+          <span class="p-fluid">
+            <button
+              (click)="createPost()"
+              pButton
+              pRipple
+              type="button"
+              style="width: 20%"
+              label="{{ 'createPost.create' | translate }}"
+              type="submit"
+            ></button>
+          </span>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

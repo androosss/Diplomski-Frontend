@@ -1,0 +1,155 @@
+<div class="col-12">
+  <div class="card">
+    <p-multiSelect
+      [options]="sports"
+      [(ngModel)]="selectedSports"
+      optionLabel="name"
+      defaultLabel="{{ 'matches.sports' | translate }}"
+    ></p-multiSelect>
+    <button
+      style="margin-left: 25px; margin-bottom: 25px"
+      (click)="getMatches()"
+      pButton
+      pRipple
+      type="button"
+      label="{{ 'matches.findMatches' | translate }}"
+      type="submit"
+    ></button>
+    <p-table
+      #dt1
+      [value]="data"
+      dataKey="id"
+      [rows]="10"
+      [rowHover]="true"
+      sortField="createdAt"
+      [sortOrder]="-1"
+      styleClass="p-datatable-gridlines"
+      [paginator]="true"
+      responsiveLayout="scroll"
+    >
+      <ng-template pTemplate="header">
+        <tr>
+          <th pSortableColumn="startTime">
+            {{ "matches.dateTime" | translate }}
+          </th>
+          <th pSortableColumn="sport">{{ "matches.sport" | translate }}</th>
+          <th>{{ "matches.players" | translate }}</th>
+          <th>{{ "matches.team1" | translate }}</th>
+          <th>{{ "matches.team2" | translate }}</th>
+          <th>
+            <div class="flex justify-content-between align-items-center">
+              {{ "matches.join" | translate }}
+            </div>
+          </th>
+          <th>
+            <div class="flex justify-content-between align-items-center">
+              {{ "matches.enterResult" | translate }}
+            </div>
+          </th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-match>
+        <tr>
+          <!--<td style="min-width: 10rem;">
+            {{match.matchId}}
+          </td>-->
+          <td style="min-width: 15rem">
+            {{ match.startTime | date : "MM/dd/yyyy hh:mm:ss aa" }}
+          </td>
+          <td style="min-width: 10rem">
+            {{ match.sport }}
+          </td>
+          <td style="min-width: 10rem">
+            {{ match.playerNames }}
+          </td>
+          <td style="min-width: 10rem">
+            {{
+              match.teams !== undefined
+                ? match.teams[0]
+                : "Match isn't full yet"
+            }}
+          </td>
+          <td style="min-width: 10rem">
+            {{
+              match.teams !== undefined
+                ? match.teams[1]
+                : "Match isn't full yet"
+            }}
+          </td>
+          <td style="min-width: 10rem">
+            <button
+              *ngIf="!this.checkIfApplied(match.players)"
+              #buttonForAction
+              pButton
+              pRipple
+              type="button"
+              (click)="onClickApply(match)"
+              icon="pi pi-check"
+            ></button>
+            <div *ngIf="this.checkIfApplied(match.players)">
+              You are already applied for match
+            </div>
+          </td>
+          <td style="min-width: 10rem">
+            <span
+              class="p-fluid"
+              *ngIf="
+                match.status === 'FULL' && this.checkIfApplied(match.players)
+              "
+            >
+              <input
+                type="text"
+                pInputText
+                placeholder="format 3:0"
+                (keydown.enter)="
+                  updateResult(match.matchId, $event.target.value)
+                "
+              />
+            </span>
+            <div *ngIf="match.status === 'FINISHED'">
+              Match is already finished
+            </div>
+            <div
+              *ngIf="
+                match.status === 'CREATED' && this.checkIfApplied(match.players)
+              "
+            >
+              Match isn't full yet
+            </div>
+            <div
+              *ngIf="
+                match.status !== 'FINISHED' &&
+                !this.checkIfApplied(match.players)
+              "
+            >
+              You aren't applied for this match
+            </div>
+          </td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="emptymessage">
+        <tr>
+          <td colspan="7">{{ "messages.noDataFound" | translate }}</td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="loadingbody">
+        <tr>
+          <td colspan="7">{{ "messages.loadingData" | translate }}</td>
+        </tr>
+      </ng-template>
+    </p-table>
+
+    <div style="margin-top: 50px">
+      <button
+        #buttonForCreation
+        pButton
+        pRipple
+        type="button"
+        (click)="onClickCreate()"
+        style="margin-left: 42%; font-weight: bold"
+      >
+        Create match
+      </button>
+    </div>
+  </div>
+</div>

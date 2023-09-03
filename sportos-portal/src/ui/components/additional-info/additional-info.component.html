@@ -1,0 +1,104 @@
+<div class="layout-main-container">
+  <p-messages key="error"></p-messages>
+  <p-toast key="success" position="top-right"></p-toast>
+  <div class="layout-main">
+    <div
+      style="
+        width: 300px;
+        margin: auto;
+        -webkit-border-radius: 10px;
+        -moz-border-radius: 10px;
+        padding: 25px;
+        filter: alpha(opacity=95);
+        opacity: 0.95;
+        border-radius: 10x;
+        border: 1px solid #ffffff;
+        text-align: center;
+      "
+    >
+      <h3 i18n>{{ "Sportos Portal" | translate }}</h3>
+
+      <form [formGroup]="form" (keydown.enter)="submitForm($event)">
+        <div style="margin-bottom: 20px">
+          Give us some additional info to make sportos even better for you.
+        </div>
+        <div class="formgroup-inline">
+          <!-- userType -->
+          <div
+            class="p-field p-col"
+            style="width: 222px; padding-bottom: 20px; margin: 0 auto"
+          >
+            <span class="p-fluid">
+              <p-dropdown
+                [options]="types"
+                optionLabel="name"
+                optionValue="value"
+                [showClear]="true"
+                placeholder="User type"
+                [formControl]="form.controls['userType']"
+                (onChange)="onChangeType($event)"
+              ></p-dropdown>
+            </span>
+          </div>
+
+          <!-- sport -->
+          <div
+            class="p-field p-col"
+            style="width: 222px; padding-bottom: 20px; margin: 0 auto"
+            *ngIf="
+              userType !== undefined &&
+              userType !== null &&
+              UserType !== 'player'
+            "
+          >
+            <span class="p-fluid">
+              <p-dropdown
+                [options]="sports"
+                optionLabel="name"
+                optionValue="name"
+                [showClear]="true"
+                placeholder="Sport"
+                [formControl]="form.controls['sport']"
+                (onChange)="onChangeSport($event)"
+              ></p-dropdown>
+            </span>
+          </div>
+
+          <!-- city -->
+          <div
+            class="p-field p-col"
+            style="width: 222px; padding-bottom: 20px; margin: 0 auto"
+          >
+            <span class="p-fluid">
+              <input
+                type="text"
+                pInputText
+                [ngClass]="{
+                  'required-background-class':
+                    form.controls['city'].hasError('required')
+                }"
+                [formControl]="form.controls['city']"
+                placeholder="{{ 'register.city' | translate }}"
+              />
+            </span>
+          </div>
+
+          <!-- button -->
+          <div class="p-field p-col" style="margin: 0 auto">
+            <span class="p-fluid">
+              <button
+                (click)="register()"
+                pButton
+                pRipple
+                type="button"
+                label="{{ 'info.submit' | translate }}"
+                type="submit"
+              ></button>
+            </span>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <app-footer></app-footer>
+</div>

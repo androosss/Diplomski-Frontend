@@ -1,0 +1,118 @@
+<div class="col-12">
+  <div class="card">
+    <p-multiSelect
+      [options]="sports"
+      [(ngModel)]="selectedSports"
+      optionLabel="name"
+      defaultLabel="{{ 'practice.sports' | translate }}"
+    ></p-multiSelect>
+    <button
+      style="margin-left: 25px; margin-bottom: 25px"
+      (click)="getCoaches()"
+      pButton
+      pRipple
+      type="button"
+      label="{{ 'practice.findCoaches' | translate }}"
+      type="submit"
+    ></button>
+    <p-table
+      #dt1
+      [value]="data"
+      dataKey="id"
+      [rows]="10"
+      [rowHover]="true"
+      sortField="createdAt"
+      [sortOrder]="-1"
+      styleClass="p-datatable-gridlines"
+      [paginator]="true"
+      responsiveLayout="scroll"
+    >
+      <ng-template pTemplate="header">
+        <tr>
+          <th pSortableColumn="name">{{ "practice.name" | translate }}</th>
+          <th pSortableColumn="sport">{{ "practice.sport" | translate }}</th>
+          <th>
+            <div class="flex justify-content-between align-items-center">
+              {{ "practice.apply" | translate }}
+            </div>
+          </th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-coach>
+        <tr>
+          <td style="min-width: 15rem">
+            {{ coach.name }}
+          </td>
+          <td style="min-width: 10rem">
+            {{ coach.sport }}
+          </td>
+          <td style="min-width: 10rem">
+            <p-button
+              (click)="showDialog(coach.username, coach.sport)"
+              icon="pi pi-external-link"
+              label="Apply"
+            ></p-button>
+            <p-dialog
+              [header]="'practice.apply' | translate"
+              [(visible)]="visible"
+              [style]="{ width: '30%', height: '50%' }"
+            >
+              <!-- date -->
+              <div
+                class="p-field p-col"
+                style="width: 222px; padding-bottom: 20px; margin: 0 auto"
+              >
+                <span class="p-fluid">
+                  <p-calendar
+                    placeholder="Date"
+                    [showIcon]="true"
+                    inputId="icon"
+                    (onSelect)="onChangeDate($event)"
+                  ></p-calendar>
+                </span>
+              </div>
+
+              <!-- time -->
+              <div
+                class="p-field p-col"
+                style="width: 222px; padding-bottom: 20px; margin: 0 auto"
+                *ngIf="date !== undefined"
+              >
+                <span class="p-fluid">
+                  <p-dropdown
+                    [options]="times"
+                    optionLabel="value"
+                    optionValue="value"
+                    [showClear]="true"
+                    placeholder="Time"
+                    (onChange)="onChangeTime($event)"
+                  ></p-dropdown>
+                </span>
+              </div>
+              <button
+                style="width: 30%; margin-left: 35%; margin-top: 10px"
+                #buttonForAction
+                pButton
+                pRipple
+                type="button"
+                (click)="onClickApply(coach)"
+              >
+                {{ "practice.schedule" | translate }}
+              </button>
+            </p-dialog>
+          </td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="emptymessage">
+        <tr>
+          <td colspan="7">{{ "messages.noDataFound" | translate }}</td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="loadingbody">
+        <tr>
+          <td colspan="7">{{ "messages.loadingData" | translate }}</td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+</div>

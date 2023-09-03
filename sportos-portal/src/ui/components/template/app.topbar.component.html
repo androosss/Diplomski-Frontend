@@ -1,0 +1,46 @@
+<div class="layout-topbar">
+  <a class="layout-topbar-logo" routerLink="">
+    <img
+      src="assets/layout/images/{{
+        templateComponent.dark ? 'logo-white' : 'logo-dark'
+      }}.svg"
+      alt="logo"
+    />
+    <span>SPORTOS</span>
+  </a>
+
+  <a
+    class="p-link layout-menu-button layout-topbar-button"
+    href="#"
+    (click)="templateComponent.toggleMenu($event)"
+  >
+    <i class="pi pi-bars"></i>
+  </a>
+
+  <a
+    class="p-link layout-topbar-menu-button layout-topbar-button"
+    href="#"
+    (click)="templateComponent.toggleTopMenu($event)"
+  >
+    <i class="pi pi-ellipsis-v"></i>
+  </a>
+
+  <div
+    class="layout-topbar-menu"
+    [ngClass]="{
+      'layout-topbar-menu-mobile-active': templateComponent.topMenuActive
+    }"
+  >
+    <!-- <a href="#" class="p-link layout-topbar-button"> -->
+    <span style="margin-right: 10px">{{ username }}</span>
+    <i class="pi pi-user" (click)="menu.toggle($event)"></i>
+    <p-menu
+      #menu
+      [popup]="true"
+      [model]="menuItems"
+      [appendTo]="'body'"
+    ></p-menu>
+    <!-- <p-button (click)="onIconClick()"></p-button> -->
+    <!-- </a> -->
+  </div>
+</div>

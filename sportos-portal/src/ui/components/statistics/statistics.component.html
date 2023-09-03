@@ -1,0 +1,125 @@
+<div class="col-12">
+  <div class="card">
+    <div style="margin-left: 40%; width: 20%">
+      <p-dropdown
+        [options]="sports"
+        [(ngModel)]="selectedSports"
+        optionLabel="name"
+        (onChange)="getStats()"
+      ></p-dropdown>
+    </div>
+    <p-tabView>
+      <p-tabPanel header="Matches">
+        <div
+          *ngIf="stats"
+          style="
+            margin-top: 30px;
+            margin-left: 40%;
+            width: 20%;
+            text-align: center;
+          "
+        >
+          {{ stats.winRatio }}
+        </div>
+        <p-dataView *ngIf="stats" [value]="stats.matches" [loading]="loading">
+          <ng-template let-match pTemplate="listItem">
+            <div
+              style="
+                margin-top: 30px;
+                margin-left: 20%;
+                width: 60%;
+                border: solid 1px;
+                border-radius: 10px;
+                margin-bottom: 50px;
+                background-color: #040d19;
+              "
+            >
+              <div
+                style="
+                  display: inline-block;
+                  text-align: left;
+                  border: none;
+                  margin-top: 5px;
+                  margin-bottom: 10px;
+                  width: 30%;
+                  margin-left: 5%;
+                "
+              >
+                {{ match.myTeam.join(",") }}
+              </div>
+              <div
+                style="
+                  display: inline-block;
+                  text-align: center;
+                  border: none;
+                  margin-top: 5px;
+                  margin-bottom: 10px;
+                  width: 30%;
+                "
+              >
+                {{ match.score }}
+              </div>
+              <div
+                style="
+                  display: inline-block;
+                  text-align: right;
+                  border: none;
+                  margin-top: 5px;
+                  margin-bottom: 10px;
+                  width: 30%;
+                "
+              >
+                {{ match.oppTeam.join(",") }}
+              </div>
+            </div>
+          </ng-template>
+        </p-dataView>
+      </p-tabPanel>
+      <p-tabPanel header="Tournaments">
+        <p-table
+          #dt1
+          [value]="stats?.tournaments"
+          dataKey="id"
+          [rows]="10"
+          [rowHover]="true"
+          sortField="createdAt"
+          [sortOrder]="-1"
+          styleClass="p-datatable-gridlines"
+          [paginator]="true"
+          responsiveLayout="scroll"
+        >
+          <ng-template pTemplate="header">
+            <tr>
+              <th>{{ "stats.tournament" | translate }}</th>
+              <th>{{ "stats.team" | translate }}</th>
+              <th>{{ "stats.rank" | translate }}</th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-tournament>
+            <tr>
+              <td style="min-width: 10rem">
+                {{ tournament.tournament }}
+              </td>
+              <td style="min-width: 10rem">
+                {{ tournament.myTeam.join(",") }}
+              </td>
+              <td style="min-width: 10rem">
+                {{ tournament.ranking }}
+              </td>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="emptymessage">
+            <tr>
+              <td colspan="7">{{ "messages.noDataFound" | translate }}</td>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="loadingbody">
+            <tr>
+              <td colspan="7">{{ "messages.loadingData" | translate }}</td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </p-tabPanel>
+    </p-tabView>
+  </div>
+</div>

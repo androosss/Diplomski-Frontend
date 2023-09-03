@@ -1,0 +1,122 @@
+<div class="col-12">
+  <div class="card">
+    <p-tabView>
+      <p-tabPanel header="Round">
+        <p-table
+          #dt1
+          [value]="pairings"
+          dataKey="id"
+          [rows]="10"
+          [rowHover]="true"
+          sortField="createdAt"
+          [sortOrder]="-1"
+          styleClass="p-datatable-gridlines"
+          [paginator]="true"
+          responsiveLayout="scroll"
+        >
+          <ng-template pTemplate="header">
+            <tr>
+              <th>{{ "pairings.teamOne" | translate }}</th>
+              <th>{{ "pairings.score" | translate }}</th>
+              <th>{{ "pairings.teamTwo" | translate }}</th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-pairing>
+            <tr>
+              <td style="min-width: 20rem">
+                {{ pairing.teamOne }}
+              </td>
+              <td style="min-width: 2rem">
+                <span class="p-fluid">
+                  <input
+                    type="text"
+                    pInputText
+                    placeholder="format 3:0"
+                    [(ngModel)]="pairing.score"
+                    style="text-align: center"
+                  />
+                </span>
+              </td>
+              <td style="min-width: 20rem">
+                {{ pairing.teamTwo }}
+              </td>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="emptymessage">
+            <tr>
+              <td colspan="7">{{ "messages.noDataFound" | translate }}</td>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="loadingbody">
+            <tr>
+              <td colspan="7">{{ "messages.loadingData" | translate }}</td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </p-tabPanel>
+      <p-tabPanel header="Standings">
+        <p-table
+          #dt1
+          [value]="standings"
+          dataKey="id"
+          [rows]="10"
+          [rowHover]="true"
+          sortField="createdAt"
+          [sortOrder]="-1"
+          styleClass="p-datatable-gridlines"
+          [paginator]="true"
+          responsiveLayout="scroll"
+        >
+          <ng-template pTemplate="header">
+            <tr>
+              <th>{{ "standings.rank" | translate }}</th>
+              <th>{{ "standings.team" | translate }}</th>
+              <th>{{ "standings.points" | translate }}</th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-standing>
+            <tr>
+              <td style="min-width: 1rem">
+                {{ standing.ranking }}
+              </td>
+              <td style="min-width: 10rem">
+                {{ standing.teamName }}
+              </td>
+              <td style="min-width: 10rem">
+                {{ standing.points }}
+              </td>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="emptymessage">
+            <tr>
+              <td colspan="7">{{ "messages.noDataFound" | translate }}</td>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="loadingbody">
+            <tr>
+              <td colspan="7">{{ "messages.loadingData" | translate }}</td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </p-tabPanel>
+    </p-tabView>
+    <button
+      (click)="createNextRound()"
+      [disabled]="event.teams.length <= event.tournament.rounds.length + 1"
+      pButton
+      pRipple
+      type="button"
+      label="{{ 'eventControl.next' | translate }}"
+      style="margin-top: 30px; margin-left: 20%; width: 20%"
+    ></button>
+    <button
+      (click)="finishEvent()"
+      pButton
+      pRipple
+      type="button"
+      label="{{ 'eventControl.finish' | translate }}"
+      style="margin-top: 30px; margin-left: 20%; width: 20%"
+      [disabled]="event.eventStatus !== 'ACTIVE'"
+    ></button>
+  </div>
+</div>

@@ -1,0 +1,90 @@
+<div class="col-12">
+  <div class="card">
+    <p-multiSelect
+      [options]="sports"
+      [(ngModel)]="selectedSports"
+      optionLabel="name"
+      defaultLabel="{{ 'teams.sports' | translate }}"
+    ></p-multiSelect>
+    <button
+      style="margin-left: 25px; margin-bottom: 25px"
+      (click)="getTeams()"
+      pButton
+      pRipple
+      type="button"
+      label="{{ 'teams.findTeams' | translate }}"
+      type="submit"
+    ></button>
+    <p-table
+      #dt1
+      [value]="data"
+      dataKey="id"
+      [rows]="10"
+      [rowHover]="true"
+      sortField="createdAt"
+      [sortOrder]="-1"
+      styleClass="p-datatable-gridlines"
+      [paginator]="true"
+      responsiveLayout="scroll"
+    >
+      <ng-template pTemplate="header">
+        <tr>
+          <th pSortableColumn="name">{{ "teams.name" | translate }}</th>
+          <th pSortableColumn="sport">{{ "teams.sport" | translate }}</th>
+          <th>{{ "teams.players" | translate }}</th>
+          <th>
+            <div class="flex justify-content-between align-items-center">
+              {{ "teams.join" | translate }}
+            </div>
+          </th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-team>
+        <tr>
+          <td style="min-width: 15rem">
+            {{ team.name }}
+          </td>
+          <td style="min-width: 10rem">
+            {{ team.sport }}
+          </td>
+          <td style="min-width: 10rem">
+            {{ team.players }}
+          </td>
+          <td style="min-width: 10rem">
+            <button
+              #buttonForAction
+              pButton
+              pRipple
+              type="button"
+              (click)="onClickApply(team)"
+              icon="pi pi-check"
+            ></button>
+          </td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="emptymessage">
+        <tr>
+          <td colspan="7">{{ "messages.noDataFound" | translate }}</td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="loadingbody">
+        <tr>
+          <td colspan="7">{{ "messages.loadingData" | translate }}</td>
+        </tr>
+      </ng-template>
+    </p-table>
+
+    <div style="margin-top: 50px">
+      <button
+        #buttonForCreation
+        pButton
+        pRipple
+        type="button"
+        (click)="onClickCreate()"
+        style="margin-left: 42%; font-weight: bold"
+      >
+        Create team
+      </button>
+    </div>
+  </div>
+</div>

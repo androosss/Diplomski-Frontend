@@ -1,0 +1,85 @@
+<div class="layout-main">
+  <div
+    style="margin-top: 30px; margin-left: 40%; width: 20%; text-align: center"
+  >
+    <p-rating
+      [cancel]="false"
+      [(ngModel)]="myReview.rating"
+      style="margin-left: 40%; width: 20%"
+    ></p-rating>
+    <textarea
+      style="margin-top: 10px; margin-left: -20%; resize: none"
+      rows="5"
+      cols="30"
+      pInputTextarea
+      [(ngModel)]="myReview.comment"
+    ></textarea>
+    <button
+      style="margin-top: 10px"
+      #buttonForAction
+      pButton
+      pRipple
+      type="button"
+      (click)="updateReviews()"
+    >
+      Save
+    </button>
+  </div>
+  <div style="margin-top: 30px">
+    <p-dataView
+      *ngIf="reviews"
+      [value]="reviews"
+      [loading]="loading"
+      emptyMessage="No reviews yet"
+    >
+      <ng-template let-review pTemplate="listItem">
+        <div
+          style="
+            margin-top: 30px;
+            margin-left: 20%;
+            width: 60%;
+            border: solid 1px;
+            border-radius: 10px;
+            margin-bottom: 50px;
+            background-color: #040d19;
+          "
+        >
+          <div
+            style="
+              display: inline-block;
+              text-align: left;
+              border: none;
+              margin-top: 5px;
+              margin-bottom: 10px;
+              width: 60%;
+              margin-left: 20%;
+            "
+          >
+            {{ review.name }}
+          </div>
+          <div style="width: 60%; margin-left: 20%; margin-top: 10px">
+            <p-rating
+              [(ngModel)]="review.rating"
+              [readonly]="true"
+              [cancel]="false"
+            ></p-rating>
+          </div>
+          <textarea
+            style="
+              width: 60%;
+              margin-left: 20%;
+              resize: none;
+              margin-top: 10px;
+              margin-bottom: 10px;
+            "
+            rows="5"
+            cols="30"
+            pInputTextarea
+            [readonly]="true"
+            [ngModel]="review.comment"
+          ></textarea>
+        </div>
+      </ng-template>
+    </p-dataView>
+  </div>
+</div>

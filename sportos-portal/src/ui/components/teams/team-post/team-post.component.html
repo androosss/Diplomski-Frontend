@@ -1,0 +1,68 @@
+<div class="layout-main">
+  <div
+    style="
+      width: 300px;
+      margin: auto;
+      -webkit-border-radius: 10px;
+      -moz-border-radius: 10px;
+      padding: 25px;
+      filter: alpha(opacity=95);
+      opacity: 0.95;
+      border-radius: 10x;
+      border: 1px solid #ffffff;
+      text-align: center;
+    "
+  >
+    <h3 i18n>{{ "Create team" | translate }}</h3>
+
+    <form [formGroup]="form" (keydown.enter)="submitForm($event)">
+      <div class="formgroup-inline">
+        <!-- sport -->
+        <div
+          class="p-field p-col"
+          style="width: 222px; padding-bottom: 20px; margin: 0 auto"
+        >
+          <span class="p-fluid">
+            <p-dropdown
+              [options]="sports"
+              optionLabel="name"
+              optionValue="name"
+              [showClear]="true"
+              placeholder="Sport"
+              [formControl]="form.controls['sport']"
+            ></p-dropdown>
+          </span>
+        </div>
+
+        <!-- name -->
+        <div
+          class="p-field p-col"
+          style="width: 222px; padding-bottom: 20px; margin: 0 auto"
+        >
+          <span class="p-fluid">
+            <input
+              type="text"
+              pInputText
+              placeholder="Name"
+              [formControl]="form.controls['name']"
+            />
+          </span>
+        </div>
+
+        <!-- button -->
+        <div class="p-field p-col" style="margin: 0 auto">
+          <span class="p-fluid">
+            <button
+              (click)="createTeam()"
+              pButton
+              pRipple
+              type="button"
+              label="{{ 'createTeam.create' | translate }}"
+              type="submit"
+            ></button>
+          </span>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

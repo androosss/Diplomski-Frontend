@@ -1,0 +1,116 @@
+<div class="layout-main-container">
+  <p-messages key="error"></p-messages>
+  <p-toast key="success" position="top-right"></p-toast>
+  <div class="layout-main">
+    <div
+      style="
+        width: 300px;
+        margin: auto;
+        -webkit-border-radius: 10px;
+        -moz-border-radius: 10px;
+        padding: 25px;
+        filter: alpha(opacity=95);
+        opacity: 0.95;
+        border-radius: 10x;
+        border: 1px solid #ffffff;
+        text-align: center;
+      "
+    >
+      <h3 i18n>{{ "Sportos Portal" | translate }}</h3>
+
+      <form [formGroup]="form" (keydown.enter)="submitForm($event)">
+        <div class="formgroup-inline">
+          <!-- username -->
+          <div
+            class="p-field p-col"
+            style="width: 222px; padding-bottom: 20px; margin: 0 auto"
+          >
+            <span class="p-fluid">
+              <input
+                type="text"
+                pInputText
+                [ngClass]="{
+                  'required-background-class':
+                    form.controls['username'].hasError('required')
+                }"
+                [formControl]="form.controls['username']"
+                placeholder="{{ 'login.username' | translate }}"
+              />
+            </span>
+          </div>
+
+          <!-- password -->
+          <div
+            class="p-field p-col"
+            style="width: 222px; padding-bottom: 20px; margin: 0 auto"
+          >
+            <span class="p-fluid">
+              <input
+                type="password"
+                pInputText
+                [ngClass]="{
+                  'required-background-class':
+                    form.controls['password'].hasError('required')
+                }"
+                [formControl]="form.controls['password']"
+                placeholder="{{ 'login.password' | translate }}"
+              />
+            </span>
+          </div>
+          <!-- button -->
+          <div class="p-field p-col" style="margin: 0 auto">
+            <span class="p-fluid">
+              <button
+                (click)="login()"
+                pButton
+                pRipple
+                type="button"
+                label="{{ 'login.login' | translate }}"
+                type="submit"
+              ></button>
+            </span>
+          </div>
+          <div class="p-field p-col" style="margin: 0 auto">
+            <span class="p-fluid">
+              <button
+                (click)="register()"
+                pButton
+                pRipple
+                type="button"
+                label="{{ 'login.register' | translate }}"
+                type="submit"
+              ></button>
+            </span>
+          </div>
+          <div style="width: 40px"></div>
+          <div
+            class="p-field p-col"
+            style="margin: 0 auto; margin-top: 20px"
+            id="buttonDiv"
+          ></div>
+          <div
+            class="p-field p-col"
+            style="margin: 0 auto; margin-top: 20px; margin-right: 40px"
+          >
+            <button (click)="facebookLogin()" style="background-color: black">
+              <img src="../../../assets/layout/images/fb.png" />
+            </button>
+          </div>
+          <div class="p-field p-col" style="margin: 0 auto">
+            <span class="p-fluid">
+              <button
+                (click)="reset()"
+                pButton
+                pRipple
+                type="button"
+                label="{{ 'login.reset' | translate }}"
+                type="submit"
+              ></button>
+            </span>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <app-footer></app-footer>
+</div>

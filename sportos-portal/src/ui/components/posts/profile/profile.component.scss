@@ -1,0 +1,28 @@
+:host ::ng-deep .p-frozen-column {
+    font-weight: bold;
+}
+
+:host ::ng-deep .p-datatable-frozen-tbody {
+    font-weight: bold;
+}
+
+:host ::ng-deep .p-progressbar {
+    height: .5rem;
+}
+
+:host ::ng-deep .p-multiselect {
+    min-width: 15rem;
+    max-width: 200px;
+    margin-bottom: 25px;
+}
+
+:host ::ng-deep .ui-panel-images {
+    width: auto;
+    height: inherit;
+    object-fit: contain;
+    position: relative;
+}
+
+:host ::ng-deep .p-dataview-emptymessage {
+    text-align:center;
+}

@@ -1,0 +1,199 @@
+<div class="layout-main-container">
+  <p-messages key="error"></p-messages>
+  <p-toast key="success" position="top-right"></p-toast>
+  <div class="layout-main">
+    <div
+      style="
+        width: 300px;
+        margin: auto;
+        -webkit-border-radius: 10px;
+        -moz-border-radius: 10px;
+        padding: 25px;
+        filter: alpha(opacity=95);
+        opacity: 0.95;
+        border-radius: 10x;
+        border: 1px solid #ffffff;
+        text-align: center;
+      "
+    >
+      <h3 i18n>{{ "Sportos Portal" | translate }}</h3>
+
+      <form [formGroup]="form" (keydown.enter)="submitForm($event)">
+        <div class="formgroup-inline">
+          <!-- username -->
+          <div
+            class="p-field p-col"
+            style="width: 222px; padding-bottom: 20px; margin: 0 auto"
+          >
+            <span class="p-fluid">
+              <input
+                type="text"
+                pInputText
+                [ngClass]="{
+                  'required-background-class':
+                    form.controls['username'].hasError('required')
+                }"
+                [formControl]="form.controls['username']"
+                placeholder="{{ 'register.username' | translate }}"
+              />
+            </span>
+          </div>
+
+          <!-- password -->
+          <div
+            class="p-field p-col"
+            style="width: 222px; padding-bottom: 20px; margin: 0 auto"
+          >
+            <span class="p-fluid">
+              <input
+                type="password"
+                pInputText
+                [ngClass]="{
+                  'required-background-class':
+                    form.controls['password'].hasError('required')
+                }"
+                [formControl]="form.controls['password']"
+                pTooltip="{{ 'register.passwordStrength' | translate }}"
+                placeholder="{{ 'register.password' | translate }}"
+              />
+            </span>
+          </div>
+
+          <!-- confirm password -->
+          <div
+            class="p-field p-col"
+            style="width: 222px; padding-bottom: 20px; margin: 0 auto"
+          >
+            <span class="p-fluid">
+              <input
+                type="password"
+                pInputText
+                [ngClass]="{
+                  'required-background-class':
+                    form.controls['confirmPassword'].hasError('required')
+                }"
+                [formControl]="form.controls['confirmPassword']"
+                placeholder="{{ 'register.confirmPassword' | translate }}"
+              />
+            </span>
+          </div>
+
+          <!-- email -->
+          <div
+            class="p-field p-col"
+            style="width: 222px; padding-bottom: 20px; margin: 0 auto"
+          >
+            <span class="p-fluid">
+              <input
+                type="email"
+                pInputText
+                [ngClass]="{
+                  'required-background-class':
+                    form.controls['email'].hasError('required')
+                }"
+                [formControl]="form.controls['email']"
+                placeholder="{{ 'register.email' | translate }}"
+              />
+            </span>
+          </div>
+
+          <!-- userType -->
+          <div
+            class="p-field p-col"
+            style="width: 222px; padding-bottom: 20px; margin: 0 auto"
+          >
+            <span class="p-fluid">
+              <p-dropdown
+                [options]="types"
+                optionLabel="name"
+                optionValue="value"
+                [showClear]="true"
+                placeholder="User type"
+                [formControl]="form.controls['userType']"
+                (onChange)="onChangeType($event)"
+              ></p-dropdown>
+            </span>
+          </div>
+
+          <!-- name -->
+          <div
+            class="p-field p-col"
+            style="width: 222px; padding-bottom: 20px; margin: 0 auto"
+            *ngIf="userType !== undefined && userType !== null"
+          >
+            <span class="p-fluid">
+              <input
+                type="text"
+                pInputText
+                [ngClass]="{
+                  'required-background-class':
+                    form.controls['name'].hasError('required')
+                }"
+                [formControl]="form.controls['name']"
+                placeholder="{{ 'register.name' | translate }}"
+              />
+            </span>
+          </div>
+
+          <!-- userType -->
+          <div
+            class="p-field p-col"
+            style="width: 222px; padding-bottom: 20px; margin: 0 auto"
+            *ngIf="
+              userType !== undefined &&
+              userType !== null &&
+              UserType !== 'player'
+            "
+          >
+            <span class="p-fluid">
+              <p-dropdown
+                [options]="sports"
+                optionLabel="name"
+                optionValue="name"
+                [showClear]="true"
+                placeholder="Sport"
+                [formControl]="form.controls['sport']"
+                (onChange)="onChangeSport($event)"
+              ></p-dropdown>
+            </span>
+          </div>
+
+          <!-- city -->
+          <div
+            class="p-field p-col"
+            style="width: 222px; padding-bottom: 20px; margin: 0 auto"
+            *ngIf="userType !== undefined && userType !== null"
+          >
+            <span class="p-fluid">
+              <input
+                type="text"
+                pInputText
+                [ngClass]="{
+                  'required-background-class':
+                    form.controls['city'].hasError('required')
+                }"
+                [formControl]="form.controls['city']"
+                placeholder="{{ 'register.city' | translate }}"
+              />
+            </span>
+          </div>
+
+          <!-- button -->
+          <div class="p-field p-col" style="margin: 0 auto">
+            <span class="p-fluid">
+              <button
+                (click)="register()"
+                pButton
+                pRipple
+                type="button"
+                label="{{ 'register.register' | translate }}"
+                type="submit"
+              ></button>
+            </span>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <app-footer></app-footer>
+</div>

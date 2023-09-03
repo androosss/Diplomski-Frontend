@@ -1,0 +1,128 @@
+{
+  "matches": {
+    "dateTime": "Datetime",
+    "sport": "Sport",
+    "status": "Status",
+    "players": "Players",
+    "join": "Apply for match",
+    "team1": "First team",
+    "team2": "Second team",
+    "result": "Result",
+    "enterResult": "Enter result",
+    "findMatches": "Find matches",
+    "sports": "Select sports"
+  },
+  "buttonNames": {
+    "deposit": "Deposit",
+    "withdraw": "Withdraw"
+  },
+  "messages": {
+    "noDataFound": "No data found.",
+    "loadingData": "Loading data. Please wait."
+  },
+  "amount": "Amount",
+  "homeWelcomeMessage": "Welcome to the Sportos",
+  "SportosPortal": "Sportos",
+  "chooseCurrency": "Choose a currency",
+  "login": {
+    "username": "Username",
+    "password": "Password",
+    "login": "Login",
+    "google": "Google",
+    "reset": "Reset password",
+    "facebook": "Facebook",
+    "register": "Register",
+    "logout": "Logout"
+  },
+  "info": {
+    "submit": "Submit"
+  },
+  "register": {
+    "username": "Username",
+    "password": "Password",
+    "confirmPassword": "Confirm password",
+    "email": "Email",
+    "name": "Name",
+    "city": "City",
+    "sport": "Sport",
+    "userType": "User type",
+    "register": "Register",
+    "passwordStrength": "Password has to be at least 7 characters long, contains lowercase and upercase letter and number or special character"
+  },
+  "createMatch": {
+    "create": "Create"
+  },
+  "createPost": {
+    "title": "Create post",
+    "create": "Post"
+  },
+  "createTeam": {
+    "create": "Create"
+  },
+  "profile": {
+    "post": "Post something"
+  },
+  "teams": {
+    "sport": "Sport",
+    "sports": "Sports",
+    "name": "Team name",
+    "players": "Players",
+    "join": "Apply for team",
+    "findTeams": "Find teams"
+  },
+  "tournaments": {
+    "sport": "Sport",
+    "sports": "Sports",
+    "name": "Tournament name",
+    "teams": "Teams",
+    "join": "Apply for tournament",
+    "findTournaments": "Find tournaments",
+    "time": "Starts at"
+  },
+  "createEvent": {
+    "create": "Create"
+  },
+  "event": {
+    "name": "Name",
+    "teams": "Teams",
+    "time": "Starts at",
+    "actions": "Actions"
+  },
+  "standings": {
+    "team": "Team name",
+    "rank": "Ranking",
+    "points": "Points"
+  },
+  "pairings": {
+    "teamOne": "First team",
+    "score": "Result",
+    "teamTwo": "Second team"
+  },
+  "eventControl": {
+    "next": "Create next round",
+    "finish": "Finish event"
+  },
+  "stats": {
+    "tournament": "Tournament name",
+    "team": "My team",
+    "rank": "Ranking"
+  },
+  "practice": {
+    "sports": "Sports",
+    "findCoaches": "Find coaches",
+    "name": "Coach name",
+    "sport": "Sport",
+    "apply": "Schedule appointment",
+    "schedule": "Schedule"
+  },
+  "offer": {
+    "player": "Player",
+    "time": "Apointment time",
+    "actions": "Accept offer"
+  },
+  "reviews": {
+    "name": "Name",
+    "rating": "Average rating",
+    "rate": "Rate it yourself"
+  }
+}
