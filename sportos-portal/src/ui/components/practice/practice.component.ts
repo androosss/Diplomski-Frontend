@@ -14,6 +14,7 @@ import { TemplateComponent } from '../template/template.component';
 export class PracticeComponent implements OnInit {
   data: Coach[]; // Data which shows in table
   userId: string = '';
+  active: any[];
   city: string = '';
   time: any;
   date: any;
@@ -44,6 +45,7 @@ export class PracticeComponent implements OnInit {
       next: this.handleSportsResponse.bind(this),
       error: this.handleSportsError.bind(this),
     });
+    this.fetchOffers();
   }
 
   handleSportsResponse(data): void {
@@ -171,5 +173,37 @@ export class PracticeComponent implements OnInit {
     });
     this.handleComplete();
     this.visible = false;
+  }
+
+  fetchOffers() {
+    this.templateComponent.showProgressSpinner = true;
+    this.api.getPractices('?playerId=' + this.userId).subscribe({
+      next: this.handleOffersResponse.bind(this),
+      error: this.handleOffersError.bind(this),
+    });
+  }
+
+  handleOffersResponse(data): void {
+    this.active = [];
+    let now = new Date();
+    for (let i = 0; i < data.length; i++) {
+      let start = new Date(data[i].startTime);
+      if (start > now && data[i].status === 'ACCEPTED') {
+        this.active.push(data[i]);
+      }
+    }
+    this.handleComplete();
+  }
+
+  handleOffersError(err): void {
+    console.log('[offers.component.ts] handleError(err) err= ', err);
+    this.messageService.clear();
+    this.messageService.add({
+      key: 'error',
+      severity: 'error',
+      summary: 'Error',
+      detail: err,
+    });
+    this.handleComplete();
   }
 }

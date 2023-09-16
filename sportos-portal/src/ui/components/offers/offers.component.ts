@@ -40,11 +40,6 @@ export class OffersComponent implements OnInit {
     this.templateComponent.showProgressSpinner = false;
   }
 
-  handleActiveResponse(data): void {
-    this.active = data;
-    this.handleComplete();
-  }
-
   fetchOffers() {
     this.templateComponent.showProgressSpinner = true;
     this.api.getPractices('?coachId=' + this.userId).subscribe({
